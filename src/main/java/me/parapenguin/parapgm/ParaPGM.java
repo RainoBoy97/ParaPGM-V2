@@ -8,6 +8,8 @@ public class ParaPGM extends JavaPlugin {
 	
 	public static ParaPGM instance;
 	
+	public static Match match;
+	
 	@Override
 	public void onEnable() {
 		instance = this;
@@ -16,6 +18,10 @@ public class ParaPGM extends JavaPlugin {
 	
 	public static ParaPGM getInstance() {
 		return instance;
+	}
+	
+	public static Match getMatch() {
+		return match;
 	}
 	
 	public static Logger getLog() {
