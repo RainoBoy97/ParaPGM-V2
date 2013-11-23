@@ -41,7 +41,7 @@ public class WoolObjective implements ObjectiveModule {
 	}
 	
 	public static List<WoolObjective> parse() {
-		
+		return null;
 	}
 	
 }
