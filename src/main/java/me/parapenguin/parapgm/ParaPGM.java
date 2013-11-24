@@ -1,11 +1,13 @@
 package me.parapenguin.parapgm;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import me.parapenguin.parapgm.command.JoinCommand;
 import me.parapenguin.parapgm.listeners.ConnectionListener;
+import me.parapenguin.parapgm.map.MapLoader;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -36,6 +38,11 @@ public class ParaPGM extends JavaPlugin {
 	static String noPermissionsMessage = ChatColor.RED + "No permission";
 	static String noConsoleMessage = "Console, you can't use these commands!";
 	static String invalidCommandSyntax = ChatColor.RED + "Invalid command syntax:";
+
+	static File mapsRepository;
+	static File rotationsRepository;
+	static File libsRepository;
+	public List<MapLoader> maps;
 	
 	@Override
 	public void onEnable() {
@@ -48,6 +55,31 @@ public class ParaPGM extends JavaPlugin {
 			registerListener(listener);
 		
 		setupCommands();
+		
+		maps = new ArrayList<MapLoader>();
+
+		mapsRepository = getConfig().getString("repo.maps") != null
+				? new File(getConfig().getString("repo.maps")) : new File("/home/servers/maps/");
+		rotationsRepository = getConfig().getString("repo.rotations") != null
+				? new File(getConfig().getString("repo.rotations")) : new File("/home/servers/rotations/");
+		libsRepository = getConfig().getString("repo.libs") != null
+				? new File(getConfig().getString("repo.libs")) : new File("/home/servers/libs/");
+
+		getConfig().set("repo.maps", mapsRepository.getAbsolutePath());
+		getConfig().set("repo.rotations", rotationsRepository.getAbsolutePath());
+		
+		File[] maps = mapsRepository.listFiles();
+		for (File map : maps) {
+			if (!map.isDirectory())
+				continue;
+
+			File xml = new File(map, "map.xml");
+			File region = new File(map, "region");
+			File level = new File(map, "level.dat");
+
+			boolean loadable = xml.exists() && (region.exists() && region.isDirectory()) && level.exists();
+			if (loadable) try { this.maps.add(MapLoader.getLoader(xml, region, level)); } catch(Exception ex) { ex.printStackTrace(); }
+		}
 	}
 
 	public void setupCommands() {
