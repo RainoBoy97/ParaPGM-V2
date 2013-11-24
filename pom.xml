@@ -20,6 +20,10 @@
 			<id>overcast-public</id>
 			<url>http://repo.oc.tc/content/groups/public</url>
 		</repository>
+		<repository>
+			<id>dom4j-mvnr</id>
+			<url>http://mvnrepository.com/artifact/dom4j/dom4j</url>
+		</repository>
 	</repositories>
 	
 	<build>
