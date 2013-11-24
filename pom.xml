@@ -78,5 +78,12 @@
 			<artifactId>sk89q-command-framework</artifactId>
 			<version>0.4-SNAPSHOT</version>
 		</dependency>
+		<dependancy>
+			<groupId>org.dom4j</groupId>
+			<artifactId>dom4j-1.4</artifactId>
+			<version>1.4</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependancy>
 	</dependencies>
 </project>
