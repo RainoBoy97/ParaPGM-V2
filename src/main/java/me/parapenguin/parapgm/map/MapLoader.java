@@ -56,6 +56,7 @@ public class MapLoader {
 	
 	public static MapLoader getLoader(File xml, File region, File level) {
 		File folder = xml.getParentFile();
+		return null;
 	}
 
 }
