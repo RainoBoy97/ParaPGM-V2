@@ -1,5 +1,6 @@
 package me.parapenguin.parapgm.objective.wool;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.ChatColor;
@@ -41,6 +42,10 @@ public class WoolObjective implements ObjectiveModule {
 	}
 	
 	public static List<WoolObjective> parse() {
+		List<WoolObjective> wools = new ArrayList<WoolObjective>();
+		
+		
+		
 		return null;
 	}
 	
