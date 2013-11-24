@@ -7,17 +7,19 @@ public class InfoModule {
 	
 	String name;
 	String version;
+	String objective;
 	
 	List<Contributor> authors;
 	List<Contributor> contributors;
 	
-	InfoModule(String name, String version) {
-		this(name, version, new ArrayList<Contributor>(), new ArrayList<Contributor>());
+	InfoModule(String name, String version, String objective) {
+		this(name, version, objective, new ArrayList<Contributor>(), new ArrayList<Contributor>());
 	}
 	
-	InfoModule(String name, String version, List<Contributor> authors, List<Contributor> contributors) {
+	InfoModule(String name, String version, String objective, List<Contributor> authors, List<Contributor> contributors) {
 		this.name = name;
 		this.version = version;
+		this.objective = objective;
 		this.authors = authors;
 		this.contributors = contributors;
 	}
@@ -28,6 +30,10 @@ public class InfoModule {
 	
 	public String getVersion() {
 		return version;
+	}
+	
+	public String getObjective() {
+		return objective;
 	}
 	
 	public List<Contributor> getAuthors() {
