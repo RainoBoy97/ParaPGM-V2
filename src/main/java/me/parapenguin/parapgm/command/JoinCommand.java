@@ -8,7 +8,7 @@ import com.sk89q.minecraft.util.commands.CommandException;
 
 public class JoinCommand {
 	
-	@Command(aliases = { "join" }, desc = "Join the match", min = 0, max = 1)
+	@Command(aliases = { "join" }, desc = "Join the match", usage = "[team] - The team to join", min = 0, max = 1)
 	public static void join(final CommandContext args, CommandSender sender) throws CommandException {
 		
 	}
