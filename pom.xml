@@ -17,11 +17,6 @@
 	
 	<repositories>
 		<repository>
-			<id>lombok</id>
-			<name>Lombok Repository</name>
-			<url>http://projectlombok.org/mavenrepo</url>
-		</repository>
-		<repository>
 			<id>overcast-public</id>
 			<url>http://repo.oc.tc/content/groups/public</url>
 		</repository>
@@ -82,13 +77,6 @@
 			<groupId>com.sk89q</groupId>
 			<artifactId>sk89q-command-framework</artifactId>
 			<version>0.4-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.12.2</version>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
