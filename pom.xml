@@ -17,15 +17,11 @@
 	
 	<repositories>
 		<repository>
-			<id>overcast-public</id>
-			<url>http://repo.oc.tc/content/groups/public</url>
-		</repository>
-		<repository>
 			<id>dom4j-mvnr</id>
 			<url>http://repo1.maven.org/maven2</url>
 		</repository>
 		<repository>
-			<id>tracker-private</id>
+			<id>private</id>
 			<url>http://76.164.215.43</url>
 		</repository>
 	</repositories>
@@ -73,7 +69,7 @@
 		<dependency>
 			<groupId>tc.oc</groupId>
 			<artifactId>sportbukkit-api</artifactId>
-			<version>1.5.2-R1.1-SNAPSHOT</version>
+			<version>1.6.4-R0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>tc.oc</groupId>
