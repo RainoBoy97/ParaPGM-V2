@@ -52,6 +52,15 @@ public class AboutPlayer implements Listener {
 		return player;
 	}
 	
+	public MatchTeam getTeam() {
+		return team;
+	}
+	
+	@EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+	public void onPlayerJoinTeam(PlayerJoinTeamEvent event) {
+		if(event.getPlayer() != getPlayer()) return;
+	}
+	
 	public static AboutPlayer getPlayer(Player player) {
 		for(AboutPlayer about : players)
 			if(about.getPlayer() == player)
@@ -60,9 +69,8 @@ public class AboutPlayer implements Listener {
 		return null;
 	}
 	
-	@EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-	public void onPlayerJoinTeam(PlayerJoinTeamEvent event) {
-		if(event.getPlayer() != getPlayer()) return;
+	public static List<AboutPlayer> getPlayers() {
+		return players;
 	}
 	
 }

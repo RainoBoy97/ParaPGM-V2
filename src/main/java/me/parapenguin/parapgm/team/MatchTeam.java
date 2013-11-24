@@ -6,6 +6,7 @@ import java.util.List;
 import me.parapenguin.parapgm.ParaPGM;
 import me.parapenguin.parapgm.map.MapLoader;
 import me.parapenguin.parapgm.map.exception.InvalidTeamException;
+import me.parapenguin.parapgm.player.AboutPlayer;
 import me.parapenguin.parapgm.util.StringUtils;
 import me.parapenguin.parapgm.util.XMLUtil;
 
@@ -20,33 +21,115 @@ public class MatchTeam {
 	ChatColor overhead;
 	int max;
 	int overfill;
+	boolean observers;
 	
 	String display;
+	boolean capped;
+	boolean closed;
+	
+	MatchTeam(String name, ChatColor color) {
+		this(name, color, color, 0, 0, true);
+	}
 	
 	MatchTeam(String name, ChatColor color, int max) {
-		this(name, color, color, max, max + max/4);
+		this(name, color, color, max, max + max/4, false);
 	}
 	
 	MatchTeam(String name, ChatColor color, int max, int overfill) {
-		this(name, color, color, max, overfill);
+		this(name, color, color, max, overfill, false);
 	}
 	
-	MatchTeam(String name, ChatColor color, ChatColor overhead) {
-		this.name = name;
-		this.color = color;
-		this.overhead = overhead;
-	}
-	
-	MatchTeam(String name, ChatColor color, ChatColor overhead, int max, int overfill) {
+	MatchTeam(String name, ChatColor color, ChatColor overhead, int max, int overfill, boolean observers) {
 		this.name = name;
 		this.color = color;
 		this.overhead = overhead;
 		this.max = max;
 		this.overfill = overfill;
+		this.observers = observers;
+		this.capped = true;
+		this.closed = false;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public ChatColor getColor() {
+		return color;
+	}
+	
+	public ChatColor getOverhead() {
+		return overhead;
+	}
+	
+	public int getMax() {
+		return max;
+	}
+	
+	public int getOverfill() {
+		return overfill;
+	}
+	
+	public boolean isObservers() {
+		return observers;
+	}
+	
+	public String getDisplay() {
+		return display;
 	}
 	
 	public void setDisplay(String display) {
 		this.display = display;
+	}
+	
+	public boolean isCapped() {
+		return capped;
+	}
+	
+	public void setCapped(boolean capped) {
+		this.capped = capped;
+	}
+	
+	public boolean isClosed() {
+		return closed;
+	}
+	
+	public void setClosed(boolean closed) {
+		this.closed = closed;
+	}
+	
+	public boolean canJoin(AboutPlayer player) {
+		if(isObservers()) return true;
+		if(isClosed()) return false;
+		
+		if(size() >= getOverfill() && isCapped())
+			if(player.getPlayer().hasPermission("parapgm.join.overflow")) return true;
+			else return false;
+		else if(size() >= getMax() && isCapped())
+			if(player.getPlayer().hasPermission("parapgm.join.max")) return true;
+			else return false;
+		
+		return true;
+	}
+	
+	public List<AboutPlayer> getPlayers() {
+		List<AboutPlayer> players = new ArrayList<AboutPlayer>();
+		
+		for(AboutPlayer player : AboutPlayer.getPlayers())
+			if(player.getTeam() == this)
+				players.add(player);
+		
+		return players;
+	}
+	
+	public int size() {
+		return getPlayers().size();
+	}
+	
+	@Override
+	public String toString() {
+		return "MatchTeam{name=" + name + ",color=" + color.name()
+				+ ",overhead=" + overhead.name() + ",max=" + max + ",overfill=" + overfill + ",size=" + size() + "}";
 	}
 	
 	public static List<MatchTeam> parse(MapLoader loader) {
@@ -90,7 +173,7 @@ public class MatchTeam {
 				if(overhead == null)
 					overhead = color;
 				
-				teams.add(new MatchTeam(name, color, overhead, max, overfill));
+				teams.add(new MatchTeam(name, color, overhead, max, overfill, false));
 			} catch(InvalidTeamException e) {
 				ParaPGM.getLog().warning("Invalid Team: " + e.getReason());
 				continue;
@@ -100,6 +183,7 @@ public class MatchTeam {
 			}
 		}
 		
+		if(teams.size() > 0) return teams;
 		return null;
 	}
 	
