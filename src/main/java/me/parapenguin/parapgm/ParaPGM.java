@@ -18,6 +18,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.oman.trackerdeaths.DeathPlugin;
 import com.sk89q.bukkit.util.CommandsManagerRegistration;
 import com.sk89q.minecraft.util.commands.CommandException;
 import com.sk89q.minecraft.util.commands.CommandPermissionsException;
@@ -80,6 +81,8 @@ public class ParaPGM extends JavaPlugin {
 			boolean loadable = xml.exists() && (region.exists() && region.isDirectory()) && level.exists();
 			if (loadable) try { this.maps.add(MapLoader.getLoader(xml, region, level)); } catch(Exception ex) { ex.printStackTrace(); }
 		}
+		
+		new DeathPlugin().onEnable();
 	}
 
 	public void setupCommands() {
