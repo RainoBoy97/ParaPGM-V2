@@ -22,7 +22,7 @@
 		</repository>
 		<repository>
 			<id>dom4j-mvnr</id>
-			<url>http://mvnrepository.com/artifact/dom4j/dom4j</url>
+			<url>http://repo1.maven.org/maven2</url>
 		</repository>
 	</repositories>
 	
@@ -83,9 +83,9 @@
 			<version>0.4-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>org.dom4j</groupId>
-			<artifactId>dom4j-1.4</artifactId>
-			<version>1.4</version>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
