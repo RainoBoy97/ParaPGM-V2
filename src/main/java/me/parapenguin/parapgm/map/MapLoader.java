@@ -8,14 +8,24 @@ import org.dom4j.Element;
 public class MapLoader {
 	
 	Document document;
-	Element root;
 	
 	InfoModule info;
 	
 	MapLoader(Document document, InfoModule info) {
 		this.document = document;
-		this.root = document.getRootElement();
 		this.info = info;
+	}
+	
+	public Document getDocument() {
+		return document;
+	}
+	
+	public Element getRoot() {
+		return document.getRootElement();
+	}
+	
+	public String getName() {
+		return info.getName();
 	}
 
 }

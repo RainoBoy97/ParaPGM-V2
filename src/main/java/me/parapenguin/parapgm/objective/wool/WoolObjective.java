@@ -25,18 +25,15 @@ public class WoolObjective implements ObjectiveModule {
 		
 		this.complete = false;
 	}
-	
-	@Override
+
 	public void complete(AboutPlayer player) {
 		
 	}
-	
-	@Override
+
 	public boolean isComplete() {
 		return complete;
 	}
 
-	@Override
 	public MatchTeam getTeam() {
 		return team;
 	}
