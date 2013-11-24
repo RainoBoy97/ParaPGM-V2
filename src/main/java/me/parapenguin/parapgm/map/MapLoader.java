@@ -16,6 +16,11 @@ public class MapLoader {
 		this.info = info;
 	}
 	
+	public Map getMap() {
+		//TODO: Create a way to create Map objects
+		return null;
+	}
+	
 	public Document getDocument() {
 		return document;
 	}

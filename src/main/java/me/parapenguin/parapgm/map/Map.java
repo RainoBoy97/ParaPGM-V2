@@ -1,5 +1,9 @@
 package me.parapenguin.parapgm.map;
 
-public class Map {
+import org.bukkit.event.Listener;
 
+public class Map implements Listener {
+	
+	
+	
 }
