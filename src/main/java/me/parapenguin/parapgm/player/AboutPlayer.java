@@ -4,12 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 
+import me.parapenguin.parapgm.ParaPGM;
+import me.parapenguin.parapgm.event.PlayerJoinTeamEvent;
 import me.parapenguin.parapgm.team.MatchTeam;
 
-public class AboutPlayer {
+public class AboutPlayer implements Listener {
 	
 	static List<AboutPlayer> players = new ArrayList<AboutPlayer>();
+	
+	public static AboutPlayer add(Player player) {
+		if(getPlayer(player) != null)
+			return getPlayer(player);
+		
+		AboutPlayer about = new AboutPlayer(player);
+		ParaPGM.registerListener(about);
+		
+		return about;
+	}
+	
+	public static boolean remove(AboutPlayer player) {
+		return remove(player.getPlayer());
+	}
+	
+	public static boolean remove(Player player) {
+		if(getPlayer(player) == null)
+			return false;
+		
+		AboutPlayer about = getPlayer(player);
+		players.remove(getPlayer(player));
+		
+		ParaPGM.unregisterListener(about);
+		return true;
+	}
 	
 	Player player;
 	MatchTeam team;
@@ -28,6 +58,11 @@ public class AboutPlayer {
 				return about;
 		
 		return null;
+	}
+	
+	@EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+	public void onPlayerJoinTeam(PlayerJoinTeamEvent event) {
+		if(event.getPlayer() != getPlayer()) return;
 	}
 	
 }
