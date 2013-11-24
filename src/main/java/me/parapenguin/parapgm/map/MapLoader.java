@@ -42,7 +42,7 @@ public class MapLoader {
 		return folder.getName();
 	}
 	
-	public boolean isThis(String string, List<MapLoader> loaders) {
+	public static MapLoader isThis(String string, List<MapLoader> loaders) {
 		for(MapLoader loader : loaders)
 			if(loader.getName().equalsIgnoreCase(string))
 				return loader;
