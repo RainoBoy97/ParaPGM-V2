@@ -3,6 +3,7 @@ package me.parapenguin.parapgm.module;
 import java.util.ArrayList;
 import java.util.List;
 
+@ModuleInfo(name = "InfoModule", description = "Contains information on the map", requires = {})
 public class InfoModule {
 	
 	String name;
