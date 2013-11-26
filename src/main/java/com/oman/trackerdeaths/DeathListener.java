@@ -1,5 +1,7 @@
 package com.oman.trackerdeaths;
 
+import me.parapenguin.parapgm.ParaPGM;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -29,7 +31,6 @@ public class DeathListener implements Listener {
     
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
-       
         Player victim = event.getEntity();
         Death death = new Death(victim);
         
@@ -51,8 +52,7 @@ public class DeathListener implements Listener {
         event.setDeathMessage(death.getDeathMessage());
         
         DeathEvent deathEvent = new DeathEvent(death);
-        Bukkit.getServer().getPluginManager().callEvent(deathEvent);
-        
+        ParaPGM.callEvent(deathEvent);
     }
     
     /**

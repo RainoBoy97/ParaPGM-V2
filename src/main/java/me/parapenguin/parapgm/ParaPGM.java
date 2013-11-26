@@ -16,8 +16,10 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.oman.trackerdeaths.DeathListener;
 import com.oman.trackerdeaths.DeathPlugin;
 import com.sk89q.bukkit.util.CommandsManagerRegistration;
 import com.sk89q.minecraft.util.commands.CommandException;
@@ -82,7 +84,7 @@ public class ParaPGM extends JavaPlugin {
 			if (loadable) try { this.maps.add(MapLoader.getLoader(xml, region, level)); } catch(Exception ex) { ex.printStackTrace(); }
 		}
 		
-		new DeathPlugin().onEnable();
+		if(hasPlugin("Tracker")) registerListener(new DeathListener());
 	}
 
 	public void setupCommands() {
@@ -186,6 +188,15 @@ public class ParaPGM extends JavaPlugin {
 	
 	public static void callEvent(Event event) {
 		getInstance().getServer().getPluginManager().callEvent(event);
+	}
+	
+	public static boolean hasPlugin(String name) {
+		return getInstance().getServer().getPluginManager().getPlugin(name) != null;
+	}
+	
+	public static Plugin getPlugin(String name) {
+		if(!hasPlugin(name)) return null;
+		return getInstance().getServer().getPluginManager().getPlugin(name);
 	}
 	
 }
