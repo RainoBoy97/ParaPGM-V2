@@ -24,10 +24,12 @@
 			<id>dom4j-mvnr</id>
 			<url>http://repo1.maven.org/maven2</url>
 		</repository>
+		<!-- Temp removal while it's down :L
 		<repository>
 			<id>tracker-private</id>
 			<url>http://76.164.215.43</url>
 		</repository>
+		-->
 	</repositories>
 	
 	<build>
