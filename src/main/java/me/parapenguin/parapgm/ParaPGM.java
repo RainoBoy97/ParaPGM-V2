@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import me.parapenguin.parapgm.command.JoinCommand;
+import me.parapenguin.parapgm.command.MatchCommands;
 import me.parapenguin.parapgm.listeners.ConnectionListener;
 import me.parapenguin.parapgm.map.MapLoader;
 
@@ -94,7 +94,7 @@ public class ParaPGM extends JavaPlugin {
 		};
 		
 		CommandsManagerRegistration cmdRegister = new CommandsManagerRegistration(this, commands);
-		cmdRegister.register(JoinCommand.class);
+		cmdRegister.register(MatchCommands.class);
 	} 
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
