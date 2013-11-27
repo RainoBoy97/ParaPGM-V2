@@ -25,7 +25,7 @@ public class MapCommands {
 	public static void maps(final CommandContext args, CommandSender sender) throws CommandException {
 		String bar = ChatColor.RED + " ----------- ";
 		String loaded = ChatColor.DARK_AQUA + "Loaded Maps (" + ChatColor.AQUA + "[page]" + ChatColor.DARK_AQUA
-				+ " of " + ChatColor.AQUA + "[page]" + ChatColor.DARK_AQUA + ")";
+				+ " of " + ChatColor.AQUA + "[pages]" + ChatColor.DARK_AQUA + ")";
 		
 		String header = bar + loaded + bar;
 		List<String> rows = new ArrayList<String>();
@@ -42,12 +42,6 @@ public class MapCommands {
 			page = args.getInteger(0);
 		
 		PaginatedResult result = new PaginatedResult(header, rows, results, numbered);
-		
-		loaded = ChatColor.DARK_AQUA + "Loaded Maps (" + ChatColor.AQUA + page + ChatColor.DARK_AQUA
-				+ " of " + ChatColor.AQUA + result.getPages() + ChatColor.DARK_AQUA + ")";
-		
-		header = bar + loaded + bar;
-		
 		result.display(sender, page);
 	}
 
