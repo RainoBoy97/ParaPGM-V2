@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import me.parapenguin.parapgm.command.MapCommands;
-import me.parapenguin.parapgm.command.MatchCommands;
+import me.parapenguin.parapgm.commands.MapCommands;
+import me.parapenguin.parapgm.commands.MatchCommands;
 import me.parapenguin.parapgm.listeners.ConnectionListener;
 import me.parapenguin.parapgm.map.MapLoader;
 

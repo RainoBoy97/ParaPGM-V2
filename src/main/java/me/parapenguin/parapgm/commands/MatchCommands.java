@@ -1,4 +1,4 @@
-package me.parapenguin.parapgm.command;
+package me.parapenguin.parapgm.commands;
 
 import org.bukkit.command.CommandSender;
 

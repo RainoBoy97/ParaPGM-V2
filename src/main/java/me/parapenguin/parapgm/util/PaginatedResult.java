@@ -1,4 +1,4 @@
-package me.parapenguin.parapgm.command;
+package me.parapenguin.parapgm.util;
 
 import java.util.ArrayList;
 import java.util.List;
