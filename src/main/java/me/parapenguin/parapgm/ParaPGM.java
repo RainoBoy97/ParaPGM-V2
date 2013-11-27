@@ -128,6 +128,10 @@ public class ParaPGM extends JavaPlugin {
 		return true;
 	}
 	
+	public static List<MapLoader> getMaps() {
+		return getInstance().maps;
+	}
+	
 	public static CommandsManager<CommandSender> getCommands() {
 		return getInstance().commands;
 	}

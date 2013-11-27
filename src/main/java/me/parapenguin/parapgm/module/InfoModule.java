@@ -56,6 +56,10 @@ public class InfoModule implements Module {
 		return authors;
 	}
 	
+	public List<Contributor> getContributors() {
+		return contributors;
+	}
+	
 	public class Contributor {
 		
 		String username;

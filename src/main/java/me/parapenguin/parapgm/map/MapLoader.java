@@ -1,11 +1,13 @@
 package me.parapenguin.parapgm.map;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import me.parapenguin.parapgm.map.exception.MapLoadException;
 import me.parapenguin.parapgm.map.exception.ModuleLoadException;
 import me.parapenguin.parapgm.module.InfoModule;
+import me.parapenguin.parapgm.module.InfoModule.Contributor;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -40,6 +42,21 @@ public class MapLoader {
 	
 	public String getName() {
 		return info.getName();
+	}
+	
+	public List<Contributor> getAuthors() {
+		return info.getAuthors();
+	}
+	
+	public List<String> getAuthorNames() {
+		List<String> names = new ArrayList<String>();
+		for(Contributor contrib : getAuthors())
+			names.add(contrib.getUsername());
+		return names;
+	}
+	
+	public List<Contributor> getContributors() {
+		return info.getContributors();
 	}
 	
 	public String getFolderName() {
