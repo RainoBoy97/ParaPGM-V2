@@ -45,8 +45,6 @@ public class WoolObjective implements ObjectiveModule {
 	public static List<WoolObjective> parse() {
 		List<WoolObjective> wools = new ArrayList<WoolObjective>();
 		
-		
-		
 		return null;
 	}
 

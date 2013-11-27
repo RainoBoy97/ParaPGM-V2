@@ -120,14 +120,15 @@ public class InfoModule implements Module {
 		
 		List<Contributor> contributors = new ArrayList<Contributor>();
 		Element contributorsElement = root.element("contributors");
-		for(Object object : contributorsElement.elements("contributor")) {
-			if(object instanceof Element == false) continue;
-			Element contributor = (Element) object;
-			
-			if(contributor.getText() == null) continue;
-			String contrib = contributor.attributeValue("contribution");
-			contributors.add(new Contributor(contributor.getText(), contrib));
-		}
+		if(contributorsElement != null)
+			for(Object object : contributorsElement.elements("contributor")) {
+				if(object instanceof Element == false) continue;
+				Element contributor = (Element) object;
+				
+				if(contributor.getText() == null) continue;
+				String contrib = contributor.attributeValue("contribution");
+				contributors.add(new Contributor(contributor.getText(), contrib));
+			}
 		
 		InfoModule info = new InfoModule(name, version, objective, authors, contributors);
 		return info;
