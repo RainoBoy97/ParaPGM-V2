@@ -41,7 +41,14 @@ public class MapCommands {
 		if(args.argsLength() == 1)
 			page = args.getInteger(0);
 		
-		new PaginatedResult(header, rows, results, numbered).display(sender, page);
+		PaginatedResult result = new PaginatedResult(header, rows, results, numbered);
+		
+		loaded = ChatColor.DARK_AQUA + "Loaded Maps (" + ChatColor.AQUA + page + ChatColor.DARK_AQUA
+				+ " of " + ChatColor.AQUA + result.getPages() + ChatColor.DARK_AQUA + ")";
+		
+		header = bar + loaded + bar;
+		
+		result.display(sender, page);
 	}
 
 }

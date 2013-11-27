@@ -28,8 +28,12 @@ public class PaginatedResult {
 		return ((getRows().size() - (getRows().size() % results)) / results) + 1;
 	}
 	
-	public String getHeader(int page) {
-		return header.replaceAll("[page]", page + "").replaceAll("[pages]", getPages() + "");
+	public void setHeader(String header) {
+		this.header = header;
+	}
+	
+	public String getHeader() {
+		return header;
 	}
 	
 	public List<String> getRows() {
@@ -64,7 +68,7 @@ public class PaginatedResult {
 	public void display(CommandSender sender, int page) {
 		List<String> rows = getRows(page);
 		
-		sender.sendMessage(getHeader(page));
+		sender.sendMessage(getHeader());
 		
 		int i = 1;
 		for(String row : rows) {
