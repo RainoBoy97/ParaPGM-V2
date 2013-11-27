@@ -79,7 +79,7 @@ public class StringUtils {
     public static String commaList(String prefix, List<String> values, String suffix) {
         String text = "";
         if (values.size() == 1)
-            text += values.get(0);
+            text += prefix + values.get(0);
         else if (values.size() >= 2) {
             /*
 			 * index 0 should prefix ""
