@@ -50,7 +50,7 @@ public class PaginatedResult {
 			
 		 */
 		
-		int start = getRows().size() * (page - 1);
+		int start = results * (page - 1);
 		int finish = results * page;
 		
 		if(finish >= getRows().size())
