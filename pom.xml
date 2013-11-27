@@ -63,6 +63,7 @@
 							<artifactSet>
 								<includes>
 									<include>com.sk89q:sk89q-command-framework</include>
+									<include>dom4j:dom4j</include>
 								</includes>
 							</artifactSet>
 						</configuration>
