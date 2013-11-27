@@ -51,6 +51,9 @@ public class ParaPGM extends JavaPlugin {
 	public void onEnable() {
 		instance = this;
 		getConfig().options().copyDefaults(true);
+		saveConfig();
+		reloadConfig();
+		
 		// getLog().info("Instance Loaded: " + (instance != null)); Check if the plugin is instanced.
 		
 		listeners.add(new ConnectionListener());
@@ -63,15 +66,16 @@ public class ParaPGM extends JavaPlugin {
 		maps = new ArrayList<MapLoader>();
 
 		mapsRepository = getConfig().getString("repo.maps") != null
-				? new File(getConfig().getString("repo.maps")) : new File("/home/servers/maps/");
+				? new File(getConfig().getString("repo.maps")) : new File("/parapgm/maps/");
 		rotationsRepository = getConfig().getString("repo.rotations") != null
-				? new File(getConfig().getString("repo.rotations")) : new File("/home/servers/rotations/");
+				? new File(getConfig().getString("repo.rotations")) : new File("/parapgm/rotations/");
 		libsRepository = getConfig().getString("repo.libs") != null
-				? new File(getConfig().getString("repo.libs")) : new File("/home/servers/libs/");
+				? new File(getConfig().getString("repo.libs")) : new File("/parapgm/libs/");
 
 		getConfig().set("repo.maps", mapsRepository.getAbsolutePath());
 		getConfig().set("repo.rotations", rotationsRepository.getAbsolutePath());
 		getConfig().set("repo.libs", libsRepository.getAbsolutePath());
+		saveConfig();
 		
 		File[] maps = mapsRepository.listFiles();
 		for (File map : maps) {
