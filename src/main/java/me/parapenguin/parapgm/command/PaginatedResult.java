@@ -70,7 +70,7 @@ public class PaginatedResult {
 		
 		sender.sendMessage(getHeader(page));
 		
-		int i = 1;
+		int i = 1 + ((page - 1) * results);
 		for(String row : rows) {
 			if(number) row = ChatColor.WHITE + "" + i + ". " + row;
 			sender.sendMessage(row);
