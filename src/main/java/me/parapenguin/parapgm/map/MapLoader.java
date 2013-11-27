@@ -3,6 +3,7 @@ package me.parapenguin.parapgm.map;
 import java.io.File;
 import java.util.List;
 
+import me.parapenguin.parapgm.ParaPGM;
 import me.parapenguin.parapgm.module.InfoModule;
 
 import org.dom4j.Document;
@@ -56,6 +57,8 @@ public class MapLoader {
 	
 	public static MapLoader getLoader(File xml, File region, File level) {
 		File folder = xml.getParentFile();
+		
+		ParaPGM.getLog().info("Found map: xml[" + xml.getPath() + "], region[" + region.getPath() + "], level[" + level.getPath() + "]");
 		return null;
 	}
 

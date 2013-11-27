@@ -1,0 +1,49 @@
+################################
+################################
+##                            ##
+##   OPTION: server           ##
+##                            ##
+##   Values:                  ##
+##   - default (auto-load)    ##
+##   - select (select maps)   ##
+##   - tourney (tournament)   ##
+##                            ##
+################################
+################################
+
+################################
+################################
+##                            ##
+##   OPTION: maps             ##
+##   This is only needed      ##
+##   if the server value      ##
+##   is set to 'select'       ##
+##                            ##
+##   Input maps like so:      ##
+##   maps:                    ##
+##     '[name]':              ##
+##       short: '[short]      ##
+##       src: '[src-folder]   ##
+##                            ##
+################################
+################################
+
+################################
+################################
+##                            ##
+##   OPTION: settings         ##
+##   This is only needed      ##
+##   if the server value      ##
+##   is set to 'select'       ##
+##                            ##
+##   Input maps like so:      ##
+##   maps:                    ##
+##     '[name]':              ##
+##       short: '[short]      ##
+##       src: '[src-folder]   ##
+##                            ##
+################################
+################################
+
+server: default
+maps: {}

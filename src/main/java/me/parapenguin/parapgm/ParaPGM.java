@@ -50,6 +50,7 @@ public class ParaPGM extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		instance = this;
+		getConfig().options().copyDefaults(true);
 		// getLog().info("Instance Loaded: " + (instance != null)); Check if the plugin is instanced.
 		
 		listeners.add(new ConnectionListener());
@@ -70,6 +71,7 @@ public class ParaPGM extends JavaPlugin {
 
 		getConfig().set("repo.maps", mapsRepository.getAbsolutePath());
 		getConfig().set("repo.rotations", rotationsRepository.getAbsolutePath());
+		getConfig().set("repo.libs", libsRepository.getAbsolutePath());
 		
 		File[] maps = mapsRepository.listFiles();
 		for (File map : maps) {
