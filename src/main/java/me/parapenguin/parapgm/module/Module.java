@@ -1,15 +1,15 @@
 package me.parapenguin.parapgm.module;
 
-import me.parapenguin.parapgm.Match;
+import me.parapenguin.parapgm.map.exception.ModuleLoadException;
 
-public abstract class Module {
+import org.dom4j.Document;
+
+public interface Module {
 	
-	public static ModuleAbout getInfo() {
-		return null;
-	}
+	public ModuleAbout getInfo();
 	
-	public static Module parse(Match match) {
-		return null;
-	}
+	public boolean isUsable();
+	
+	public Module parse(Document document) throws ModuleLoadException;
 	
 }

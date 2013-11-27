@@ -3,11 +3,14 @@ package me.parapenguin.parapgm.map;
 import java.io.File;
 import java.util.List;
 
-import me.parapenguin.parapgm.ParaPGM;
+import me.parapenguin.parapgm.map.exception.MapLoadException;
+import me.parapenguin.parapgm.map.exception.ModuleLoadException;
 import me.parapenguin.parapgm.module.InfoModule;
 
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 public class MapLoader {
 	
@@ -55,11 +58,22 @@ public class MapLoader {
 		return null;
 	}
 	
-	public static MapLoader getLoader(File xml, File region, File level) {
+	public static MapLoader getLoader(File xml, File region, File level) throws ModuleLoadException, MapLoadException {
 		File folder = xml.getParentFile();
 		
-		ParaPGM.getLog().info("Found map: xml[" + xml.getPath() + "], region[" + region.getPath() + "], level[" + level.getPath() + "]");
-		return null;
+		SAXReader reader = new SAXReader();
+		
+		Document document;
+		try {
+			document = reader.read(xml);
+		} catch (DocumentException e) {
+			throw new MapLoadException("Could not load Map due to DocumentException being thrown");
+		}
+		
+		InfoModule info = (InfoModule) new InfoModule().parse(document);
+		
+		//ParaPGM.getLog().info("Found map: xml[" + xml.getPath() + "], region[" + region.getPath() + "], level[" + level.getPath() + "]");
+		return new MapLoader(folder, document, info);
 	}
 
 }
