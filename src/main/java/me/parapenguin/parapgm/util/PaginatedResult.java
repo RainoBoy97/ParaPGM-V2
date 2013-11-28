@@ -50,15 +50,19 @@ public class PaginatedResult {
 			
 		 */
 		
-		int start = results * (page - 1);
-		if(page == 1) start = 0;
-		
-		int finish = results * page;
-		
-		if(finish >= getRows().size())
-			finish = getRows().size() - 1;
-		
-		rows = getRows().subList(start, finish);
+		if(getRows().size() == 0) return rows;
+		else if(getRows().size() == 1) rows.addAll(getRows());
+		else {
+			int start = results * (page - 1);
+			if(page == 1) start = 0;
+			
+			int finish = results * page;
+			
+			if(finish >= getRows().size())
+				finish = getRows().size() - 1;
+			
+			rows = getRows().subList(start, finish);
+		}
 		
 		return rows;
 	}
