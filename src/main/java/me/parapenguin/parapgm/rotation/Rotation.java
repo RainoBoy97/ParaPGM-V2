@@ -17,7 +17,7 @@ public class Rotation {
 		List<MapLoader> loaders = new ArrayList<MapLoader>();
 		
 		try {
-			if(!rotation.exists() || !rotation.isDirectory())
+			if(!rotation.exists() || rotation.isDirectory())
 				throw new RotationLoadException("The rotation must be a file and can't be a directory.");
 			
 			for (String rawLine : Files.readAllLines(rotation.toPath(), Charsets.UTF_8)) {
