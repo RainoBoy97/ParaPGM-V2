@@ -1,10 +1,11 @@
-package me.parapenguin.parapgm.command;
+package me.parapenguin.parapgm.commands;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import me.parapenguin.parapgm.ParaPGM;
 import me.parapenguin.parapgm.map.MapLoader;
+import me.parapenguin.parapgm.util.PaginatedResult;
 import me.parapenguin.parapgm.util.StringUtils;
 
 import org.bukkit.ChatColor;
