@@ -66,11 +66,11 @@ public class ParaPGM extends JavaPlugin {
 		maps = new ArrayList<MapLoader>();
 
 		mapsRepository = getConfig().getString("repo.maps") != null
-				? new File(getConfig().getString("repo.maps")) : new File("/parapgm/maps/");
+				? new File(getConfig().getString("repo.maps")) : new File("maps/");
 		rotationsRepository = getConfig().getString("repo.rotations") != null
-				? new File(getConfig().getString("repo.rotations")) : new File("/parapgm/rotations/");
+				? new File(getConfig().getString("repo.rotations")) : new File("rotation.txt");
 		libsRepository = getConfig().getString("repo.libs") != null
-				? new File(getConfig().getString("repo.libs")) : new File("/parapgm/libs/");
+				? new File(getConfig().getString("repo.libs")) : new File("libs/");
 
 		getConfig().set("repo.maps", mapsRepository.getAbsolutePath());
 		getConfig().set("repo.rotations", rotationsRepository.getAbsolutePath());

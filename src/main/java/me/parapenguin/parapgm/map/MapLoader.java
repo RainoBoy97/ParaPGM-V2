@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.parapenguin.parapgm.ParaPGM;
 import me.parapenguin.parapgm.map.exception.MapLoadException;
 import me.parapenguin.parapgm.map.exception.ModuleLoadException;
 import me.parapenguin.parapgm.module.InfoModule;
@@ -63,16 +64,16 @@ public class MapLoader {
 		return folder.getName();
 	}
 	
-	public static MapLoader isThis(String string, List<MapLoader> loaders) {
+	public boolean isThis(String string, List<MapLoader> loaders) {
 		for(MapLoader loader : loaders)
 			if(loader.getName().equalsIgnoreCase(string))
-				return loader;
+				return true;
 		
 		for(MapLoader loader : loaders)
 			if(loader.getName().toLowerCase().contains(string.toLowerCase()))
-				return loader;
+				return true;
 		
-		return null;
+		return false;
 	}
 	
 	public static MapLoader getLoader(File xml, File region, File level) throws ModuleLoadException, MapLoadException {
@@ -91,6 +92,14 @@ public class MapLoader {
 		
 		//ParaPGM.getLog().info("Found map: xml[" + xml.getPath() + "], region[" + region.getPath() + "], level[" + level.getPath() + "]");
 		return new MapLoader(folder, document, info);
+	}
+	
+	public static MapLoader getLoader(String name) {
+		for(MapLoader loader : ParaPGM.getMaps())
+			if(loader.isThis(name, ParaPGM.getMaps()))
+				return loader;
+		
+		return null;
 	}
 
 }

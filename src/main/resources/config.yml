@@ -14,6 +14,18 @@
 ################################
 ################################
 ##                            ##
+##   OPTION: name             ##
+##                            ##
+##   Supply the name of the   ##
+##   Server                   ##
+##   Defaults to 'default'    ##
+##                            ##
+################################
+################################
+
+################################
+################################
+##                            ##
 ##   OPTION: maps             ##
 ##   This is only needed      ##
 ##   if the server value      ##
@@ -46,4 +58,10 @@
 ################################
 
 server: default
+name: default
 maps: {}
+
+repo:
+  maps: maps/
+  libs: libs/
+  rotations: rotations.xml
