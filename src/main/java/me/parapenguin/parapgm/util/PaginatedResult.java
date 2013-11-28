@@ -50,8 +50,7 @@ public class PaginatedResult {
 			
 		 */
 		
-		if(getRows().size() == 0) return rows;
-		else if(getRows().size() == 1) rows.addAll(getRows());
+		if(getRows().size() <= results) rows.addAll(getRows());
 		else {
 			int start = results * (page - 1);
 			if(page == 1) start = 0;
