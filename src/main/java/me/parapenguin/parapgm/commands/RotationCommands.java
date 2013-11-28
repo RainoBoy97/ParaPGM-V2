@@ -20,12 +20,12 @@ public class RotationCommands {
 	@Command(aliases = { "rot", "rotation" }, desc = "View the current rotation", usage = "[page]", min = 0, max = 1)
 	public static void maps(final CommandContext args, CommandSender sender) throws CommandException {
 		String bar = ChatColor.RED + " ----------- ";
-		String loaded = ChatColor.DARK_AQUA + "Loaded Maps (" + ChatColor.AQUA + "[page]" + ChatColor.DARK_AQUA
+		String loaded = ChatColor.DARK_AQUA + "Rotation (" + ChatColor.AQUA + "[page]" + ChatColor.DARK_AQUA
 				+ " of " + ChatColor.AQUA + "[pages]" + ChatColor.DARK_AQUA + ")";
 		
 		String header = bar + loaded + bar;
 		List<String> rows = new ArrayList<String>();
-		for(MapLoader loader : ParaPGM.getMaps()) {
+		for(MapLoader loader : ParaPGM.getRotation().getMaps()) {
 			rows.add(ChatColor.GOLD + loader.getName()
 					+ " " + ChatColor.DARK_PURPLE + "by "
 					+ StringUtils.commaList(ChatColor.RED, loader.getAuthorNames(), ChatColor.DARK_PURPLE));

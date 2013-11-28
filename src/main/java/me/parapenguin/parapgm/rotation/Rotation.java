@@ -17,6 +17,9 @@ public class Rotation {
 		List<MapLoader> loaders = new ArrayList<MapLoader>();
 		
 		try {
+			if(!rotation.exists() || !rotation.isDirectory())
+				throw new RotationLoadException("The rotation must be a file and can't be a directory.");
+			
 			for (String rawLine : Files.readAllLines(rotation.toPath(), Charsets.UTF_8)) {
 				if(MapLoader.getLoader(rawLine) == null) {
 					ParaPGM.getLog().warning("Failed to find a map for '" + rawLine + "' in the rotation file");
@@ -33,6 +36,9 @@ public class Rotation {
 		List<RotationSlot> slots = new ArrayList<RotationSlot>();
 		for(MapLoader loader : loaders) slots.add(new RotationSlot(loader));
 		
+		if(slots.size() == 0)
+			throw new RotationLoadException("Could not load any maps from the Rotation file!");
+		
 		return new Rotation(slots);
 	}
 	
@@ -41,6 +47,15 @@ public class Rotation {
 	
 	Rotation(List<RotationSlot> slots) {
 		this.slots = slots;
+	}
+	
+	public List<MapLoader> getMaps() {
+		List<MapLoader> loaders = new ArrayList<MapLoader>();
+		
+		for(RotationSlot slot : slots)
+			loaders.add(slot.getLoader());
+		
+		return loaders;
 	}
 	
 	public RotationSlot setNext(MapLoader loader) {

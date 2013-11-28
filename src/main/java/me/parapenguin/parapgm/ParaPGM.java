@@ -1,14 +1,20 @@
 package me.parapenguin.parapgm;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import me.parapenguin.parapgm.commands.MapCommands;
 import me.parapenguin.parapgm.commands.MatchCommands;
+import me.parapenguin.parapgm.commands.RotationCommands;
 import me.parapenguin.parapgm.listeners.ConnectionListener;
 import me.parapenguin.parapgm.map.MapLoader;
+import me.parapenguin.parapgm.rotation.Rotation;
+import me.parapenguin.parapgm.rotation.RotationLoadException;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -45,7 +51,9 @@ public class ParaPGM extends JavaPlugin {
 	static File mapsRepository;
 	static File rotationsRepository;
 	static File libsRepository;
-	public List<MapLoader> maps;
+	List<MapLoader> maps;
+	
+	Rotation rotation;
 	
 	@Override
 	public void onEnable() {
@@ -91,6 +99,45 @@ public class ParaPGM extends JavaPlugin {
 		}
 		
 		if(hasPlugin("Tracker")) registerListener(new DeathListener());
+		
+		try {
+			rotation = parseRotation(rotationsRepository);
+		} catch (RotationLoadException e) {
+			getLog().warning("Failed to load Rotation, attempting to create one.");
+			if(rotationsRepository.exists()) {
+				getLog().warning("Can't create a new Rotation because the repository already exists, consider changing this...");
+				getLog().warning("Server shutting down because a Rotation could not be parsed or created.");
+				getServer().shutdown();
+				return;
+			}
+			
+			try {
+				rotationsRepository.createNewFile();
+				FileWriter write = new FileWriter(rotationsRepository, true);
+				PrintWriter print = new PrintWriter(write);
+				
+				for(MapLoader loader : getMaps())
+					print.print(loader.getName());
+				
+				print.close();
+				
+				rotation = parseRotation(rotationsRepository);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+				getLog().warning("Server shutting down because a Rotation could not be parsed or created.");
+				getServer().shutdown();
+				return;
+			} catch (RotationLoadException e1) {
+				getLog().warning("RotationLoadException: '" + e1.getMessage() + "'");
+				getLog().warning("Server shutting down because a Rotation could not be parsed or created.");
+				getServer().shutdown();
+				return;
+			}
+		}
+	}
+	
+	public Rotation parseRotation(File file) throws RotationLoadException {
+		return Rotation.provide(file);
 	}
 
 	public void setupCommands() {
@@ -104,6 +151,7 @@ public class ParaPGM extends JavaPlugin {
 		CommandsManagerRegistration cmdRegister = new CommandsManagerRegistration(this, commands);
 		cmdRegister.register(MatchCommands.class);
 		cmdRegister.register(MapCommands.class);
+		cmdRegister.register(RotationCommands.class);
 	} 
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
@@ -132,6 +180,10 @@ public class ParaPGM extends JavaPlugin {
 	
 	public static List<MapLoader> getMaps() {
 		return getInstance().maps;
+	}
+	
+	public static Rotation getRotation() {
+		return getInstance().rotation;
 	}
 	
 	public static CommandsManager<CommandSender> getCommands() {
