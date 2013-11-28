@@ -117,7 +117,7 @@ public class ParaPGM extends JavaPlugin {
 				PrintWriter print = new PrintWriter(write);
 				
 				for(MapLoader loader : getMaps())
-					print.print(loader.getName());
+					print.printf("%s" + "%n", loader.getName());
 				
 				print.close();
 				
