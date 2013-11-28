@@ -71,6 +71,11 @@ public class PaginatedResult {
 	}
 	
 	public void display(CommandSender sender, int page) {
+		if(page > getPages() || page < 1) {
+			sender.sendMessage(ChatColor.RED + "Could not find a page with that number");
+			return;
+		}
+		
 		List<String> rows = getRows(page);
 		
 		sender.sendMessage(getHeader(page));
