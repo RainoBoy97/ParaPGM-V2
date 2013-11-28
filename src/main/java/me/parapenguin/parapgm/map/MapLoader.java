@@ -64,18 +64,6 @@ public class MapLoader {
 		return folder.getName();
 	}
 	
-	public boolean isThis(String string, List<MapLoader> loaders) {
-		for(MapLoader loader : loaders)
-			if(loader.getName().equalsIgnoreCase(string))
-				return true;
-		
-		for(MapLoader loader : loaders)
-			if(loader.getName().toLowerCase().contains(string.toLowerCase()))
-				return true;
-		
-		return false;
-	}
-	
 	public static MapLoader getLoader(File xml, File region, File level) throws ModuleLoadException, MapLoadException {
 		File folder = xml.getParentFile();
 		
@@ -94,12 +82,20 @@ public class MapLoader {
 		return new MapLoader(folder, document, info);
 	}
 	
-	public static MapLoader getLoader(String name) {
-		for(MapLoader loader : ParaPGM.getMaps())
-			if(loader.isThis(name, ParaPGM.getMaps()))
+	public static MapLoader getLoader(String string, List<MapLoader> loaders) {
+		for(MapLoader loader : loaders)
+			if(loader.getName().equalsIgnoreCase(string))
+				return loader;
+		
+		for(MapLoader loader : loaders)
+			if(loader.getName().toLowerCase().contains(string.toLowerCase()))
 				return loader;
 		
 		return null;
+	}
+	
+	public static MapLoader getLoader(String name) {
+		return getLoader(name, ParaPGM.getMaps());
 	}
 
 }
