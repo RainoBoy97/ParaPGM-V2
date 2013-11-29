@@ -219,7 +219,13 @@ public class DeathListener implements Listener {
             if(shooter != null) {
                 death.setKiller(shooter);
             }
-            death.setMisc("(" + round(distance) + " blocks)");
+            if (round(distance) == 0) {
+            	return;
+            } else if (round(distance) == 1) {
+            	death.setMisc("(" + round(distance) + " block)");
+            } else {
+            	death.setMisc("(" + round(distance) + " blocks)");
+            }
         }
     }
     
