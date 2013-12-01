@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 
 import me.parapenguin.parapgm.ParaPGM;
 import me.parapenguin.parapgm.event.PlayerJoinTeamEvent;
+import me.parapenguin.parapgm.player.rank.Rank;
 import me.parapenguin.parapgm.team.MatchTeam;
 
 public class AboutPlayer implements Listener {
@@ -44,12 +45,25 @@ public class AboutPlayer implements Listener {
 	Player player;
 	MatchTeam team;
 	
+	List<Rank> ranks;
+	
 	AboutPlayer(Player player) {
 		this.player = player;
+		this.ranks = new ArrayList<Rank>();
 	}
 	
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public String getPrefix() {
+		StringBuilder sb = new StringBuilder();
+		for(Rank rank : ranks) sb.append(rank.getPrefix());
+		return sb.toString();
+	}
+	
+	public String getFormat(String message, boolean team) {
+		return message;
 	}
 	
 	public MatchTeam getTeam() {
